@@ -9,7 +9,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install flask.
 
 
 ```bash
-pip install flask
+pip install -r requirements.txt
 ```
 
 ## Usage
