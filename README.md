@@ -15,5 +15,6 @@ pip install flask
 ## Usage
 
 ```bash
+cd app
 python __init__.py
 ```
