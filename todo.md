@@ -15,6 +15,8 @@
 
 ## Backlog
 
+- [ ] Relatório
 - [ ] Requisitos Não Funcionais
 - [ ] Casos de Uso
 - [ ] Diagramas
+- [ ] Mockups para os requisitos funcionais
