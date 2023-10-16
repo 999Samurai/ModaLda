@@ -2,9 +2,9 @@
 
 Its a web application to manage stock
 
-1. [ToDo](todo.md)
 1. [Installation](#installation)
 1. [Usage](#usage)
+1. [ToDo](todo.md)
 
 ## Installation
 
