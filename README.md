@@ -11,6 +11,7 @@ Its a web application to manage stock
 - [ ] Vamos precisar de Encomendas ?
 - [ ] Vamos precisar de Vendas ?
 - [ ] Vamos precisar de Fornecedores ?
+ - [ ] Consignação
 - [ ] Os produtos estão fixos em ambas as lojas ?
 - [ ] Os produtos estão fixos em ambos os armazéns ?
 - [ ] Estratégia de Git
@@ -33,6 +34,7 @@ Its a web application to manage stock
     - [ ] Mockups para os requisitos funcionais
   - [ ] Marcar entrevista de seguimento
 - [ ] Arquitetura de um SI
+  - [ ] Análise SWOT
 - [ ] Aplicações de um SI
 - [ ] Modelação de Sistemas
 - [ ] Métodos de Construção de um SI
