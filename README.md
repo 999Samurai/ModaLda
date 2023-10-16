@@ -13,6 +13,8 @@ Its a web application to manage stock
 - [ ] Vamos precisar de Fornecedores ?
 - [ ] Os produtos estão fixos em ambas as lojas ?
 - [ ] Os produtos estão fixos em ambos os armazéns ?
+- [ ] Estratégia de Git
+  - [ ] Passar os requisitos funcionais para GitHub Issues
 - [ ] Relatório
 - [ ] Negócio
   - [ ] Missão
@@ -38,6 +40,7 @@ Its a web application to manage stock
   - [ ] Casos de Uso
   - [ ] Diagramas
 - [ ] Maturidade, Qualidade, Segurança e Usabilidade dum SI
+- [ ] Testing
 
 ## Installation
 
