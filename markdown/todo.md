@@ -1,4 +1,10 @@
+<<<<<<< HEAD:todo.md
 # Moda Lda. - ToDo
+=======
+elegoo.com
+
+# Moda Lda.
+>>>>>>> a46d54a0452fcf3ba40192170ae1706c8a35e9b4:markdown/todo.md
 
 
 - [ ] Vamos precisar de Encomendas ?
