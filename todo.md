@@ -35,3 +35,5 @@
   - [ ] Diagramas
 - [ ] Maturidade, Qualidade, Segurança e Usabilidade dum SI
 - [ ] Testing
+- [ ] Dockerize
+- [ ] Deploy
