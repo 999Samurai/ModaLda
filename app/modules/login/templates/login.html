@@ -14,6 +14,14 @@
                     <h2 class="text-center">Moda Lda</h2>
                 </div>
 
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ messages[0] }}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
                 <form class="needs-validation" action="" method="POST" novalidate>
                     <label class="form-label" for="username">Utilizador <span class="text-danger">*</span></label>
                     <input class="form-control" type="text" id="username" name="username" required>
@@ -51,7 +59,6 @@
                         event.preventDefault()
                         event.stopPropagation()
                     }
-
                     form.classList.add('was-validated')
                 }, false)
             })
