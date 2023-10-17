@@ -7,9 +7,82 @@
     <title>Dashboard | Moda Lda</title>
 </head>
 <body>
-    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-    <h1>
-        Welcome, {{ name }}! <a href="{{ url_for('auth.logout') }}">Logout</a>
-    </h1>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Navbar brand -->
+          <a class="navbar-brand mt-2 mt-lg-0" href="#">
+            <h3 class="text-white">Moda Lda</h3>
+          </a>
+          <!-- Left links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="/dashboard">Dashboard</a>
+            </li>
+          </ul>
+          <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+          <!-- Icon -->
+            <a class="text-reset me-3" href="#">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+
+          <!-- Avatar -->
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a
+                          class="nav-link dropdown-toggle d-flex align-items-center hidden-arrow"
+                          href="#"
+                          role="button"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                          aria-haspopup="true"
+                        >
+                          <img
+                            src="https://static.vecteezy.com/system/resources/previews/005/129/844/non_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg"
+                            class="rounded-circle"
+                            height="25"
+                            alt="User logo"
+                            loading="lazy"
+                          /> <span style="margin-left: 5px;"> {{ user.username }} </span>
+                        </a>
+                        <ul
+                          class="dropdown-menu dropdown-menu-end"
+                          aria-labelledby="navbarNavDarkDropdown"
+                        >
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        <!-- Right elements -->
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>
 </html>

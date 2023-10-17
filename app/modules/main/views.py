@@ -8,4 +8,4 @@ from . import bp
 @bp.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html', name=current_user.username)
+    return render_template('dashboard.html', user=current_user)
