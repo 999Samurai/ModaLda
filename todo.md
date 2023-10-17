@@ -1,12 +1,7 @@
 # Moda Lda. - TODO
 
-- [ ] Vamos precisar de Encomendas ?
-- [ ] Vamos precisar de Vendas ?
-- [ ] Vamos precisar de Fornecedores ?
-- [ ] Consignação
-- [ ] Os produtos estão fixos em ambas as lojas ?
-- [ ] Os produtos estão fixos em ambos os armazéns ?
-- [ ] Estratégia de Git
+- [ ] Git
+  - [ ] Estratégia
   - [ ] Passar os requisitos funcionais para GitHub Issues
 - [ ] Relatório
 - [ ] Negócio
@@ -21,9 +16,8 @@
 - [ ] Análise de Sistemas de Informação
   - [x] Entrevista inicial
   - [ ] Análise de Requisitos
-    - [ ] Requisitos Funcionais
+    - [ ] [Requisitos Funcionais](./docs/analise_requisitos/rf.md)
     - [ ] Requisitos Não Funcionais
-    - [ ] Mockups para os requisitos funcionais
   - [ ] Marcar entrevista de seguimento
 - [ ] Arquitetura de um SI
   - [ ] Análise SWOT
@@ -37,3 +31,5 @@
 - [ ] Testing
 - [ ] Dockerize
 - [ ] Deploy
+- [ ] Design
+  - [ ] Mockups para os requisitos funcionais
