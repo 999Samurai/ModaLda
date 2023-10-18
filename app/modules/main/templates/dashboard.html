@@ -1,88 +1,47 @@
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <title>Dashboard | Moda Lda</title>
-</head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <!-- Container wrapper -->
-      <div class="container-fluid">
-        <!-- Toggle button -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-mdb-toggle="collapse"
-          data-mdb-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <i class="fas fa-bars"></i>
-        </button>
-
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Navbar brand -->
-          <a class="navbar-brand mt-2 mt-lg-0" href="#">
-            <h3 class="text-white">Moda Lda</h3>
-          </a>
-          <!-- Left links -->
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" href="/dashboard">Dashboard</a>
-            </li>
-          </ul>
-          <!-- Left links -->
+{% extends 'sidebar.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-xl-6 col-sm-12 col-12">
+            <div class="card bg-body-tertiary shadow border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Produtos em stock</span>
+                            <span class="h3 font-bold mb-0">1.500</span>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-credit-card"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 mb-0 text-sm">
+                        <span class="badge badge-pill text-success me-2">
+                            <i class="bi bi-arrow-up me-1"></i>13%
+                        </span>
+                        <span class="text-nowrap text-xs text-muted">Desde o último mês</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Collapsible wrapper -->
-
-        <!-- Right elements -->
-        <div class="d-flex align-items-center">
-          <!-- Icon -->
-            <a class="text-reset me-3" href="#">
-                <i class="fas fa-shopping-cart"></i>
-            </a>
-
-          <!-- Avatar -->
-            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a
-                          class="nav-link dropdown-toggle d-flex align-items-center hidden-arrow"
-                          href="#"
-                          role="button"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                          aria-haspopup="true"
-                        >
-                          <img
-                            src="https://static.vecteezy.com/system/resources/previews/005/129/844/non_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg"
-                            class="rounded-circle"
-                            height="25"
-                            alt="User logo"
-                            loading="lazy"
-                          /> <span style="margin-left: 5px;"> {{ user.username }} </span>
-                        </a>
-                        <ul
-                          class="dropdown-menu dropdown-menu-end"
-                          aria-labelledby="navbarNavDarkDropdown"
-                        >
-                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
+        <div class="col-xl-6 col-sm-12 col-12">
+            <div class="card bg-body-tertiary shadow border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Lucro</span>
+                            <span class="h3 font-bold mb-0">125.000 €</span>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-people"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 mb-0 text-sm">
+                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                            <i class="bi bi-arrow-up me-1"></i>30%
+                        </span>
+                        <span class="text-nowrap text-xs text-muted">Desde o último mês</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-        <!-- Right elements -->
-      <!-- Container wrapper -->
-    </nav>
-    <!-- Navbar -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}
