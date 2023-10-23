@@ -1,22 +1,35 @@
-# Moda Lda.
+# Moda Lda. - TODO
 
-## ToDo
-
-- [ ] Lista de Stakeholders
-- [ ] Entrevista inicial
-
-## Doing
-
-- [ ] Requisitos Funcionais
-
-## Done
-
-🙈
-
-## Backlog
-
+- [ ] Git
+  - [ ] Estratégia
+  - [ ] Passar os requisitos funcionais para GitHub Issues
 - [ ] Relatório
-- [ ] Requisitos Não Funcionais
-- [ ] Casos de Uso
-- [ ] Diagramas
-- [ ] Mockups para os requisitos funcionais
+- [ ] Negócio
+  - [ ] Missão
+  - [ ] Visão
+  - [ ] Valores
+  - [ ] Objetivos Estratégicos
+  - [ ] Fatores críticos de Sucesso
+  - [ ] Stakeholders
+    - [ ] Lista de Stakeholders, ex: Gestores/Gerentes, Admins, Vendedores, etc
+  - [ ] Necessidades a cumprir
+- [ ] Análise de Sistemas de Informação
+  - [x] Entrevista inicial
+  - [ ] Análise de Requisitos
+    - [ ] [Requisitos Funcionais](./docs/analise_requisitos/rf.md)
+    - [ ] Requisitos Não Funcionais
+  - [ ] Marcar entrevista de seguimento
+- [ ] Arquitetura de um SI
+  - [ ] Análise SWOT
+- [ ] Aplicações de um SI
+- [ ] Modelação de Sistemas
+- [ ] Métodos de Construção de um SI
+- [ ] Introdução ao UML
+  - [ ] Casos de Uso
+  - [ ] Diagramas
+- [ ] Maturidade, Qualidade, Segurança e Usabilidade dum SI
+- [ ] Testing
+- [ ] Dockerize
+- [ ] Deploy
+- [ ] Design
+  - [ ] Mockups para os requisitos funcionais
