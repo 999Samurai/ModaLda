@@ -10,8 +10,11 @@ from app.modules.main import bp as bp_main
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'm0zcHMigdfCvUcV'
-    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:diogo123123@localhost:5432/modalda"
+    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///app.db"
+
     db.init_app(app)
+    with app.app_context():
+        db.create_all()
 
     app.register_blueprint(bp_login)
     app.register_blueprint(bp_main)
