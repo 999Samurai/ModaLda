@@ -2,6 +2,7 @@ from flask import Flask, redirect, url_for
 from flask_login import LoginManager, current_user
 
 from database import db
+from login_manager import login_manager
 
 from app.modules.login import bp as bp_login
 from app.modules.main import bp as bp_main
@@ -13,22 +14,15 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///app.db"
 
     db.init_app(app)
-    with app.app_context():
-        db.create_all()
+    # with app.app_context():
+    #     db.create_all()
 
     app.register_blueprint(bp_login)
     app.register_blueprint(bp_main)
 
-    login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.login_message = "Efetue o login para aceder a esta página."
     login_manager.init_app(app)
-
-    from modules.login.models import User
-
-    @login_manager.user_loader
-    def load_user(user_id):
-        return User.query.get(int(user_id))
 
     @app.route('/')
     def home():
