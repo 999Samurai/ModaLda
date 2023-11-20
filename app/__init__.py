@@ -1,11 +1,11 @@
 from flask import Flask, redirect, url_for
-from flask_login import LoginManager, current_user
+from flask_login import current_user
 
 from database import db
 from login_manager import login_manager
 
-from app.modules.login import bp as bp_login
-from app.modules.main import bp as bp_main
+from modules.login import bp as bp_login
+from modules.main import bp as bp_main
 
 
 def create_app():

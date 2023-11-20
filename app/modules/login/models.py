@@ -1,7 +1,7 @@
 from flask_login import UserMixin
 
-from app import login_manager
-from app import db
+from login_manager import login_manager
+from database import db
 
 
 @login_manager.user_loader
