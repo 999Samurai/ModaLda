@@ -6,4 +6,10 @@ from . import bp
 @bp.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html', user=current_user)
+    return render_template('dashboard.html', user=current_user, tab="dashboard")
+
+
+@bp.route('/users')
+@login_required
+def users():
+    return render_template('users.html', user=current_user, tab="users")
