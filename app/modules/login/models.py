@@ -16,11 +16,12 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String())
     password = db.Column(db.String())
+    role = db.Column(db.String())
     last_login = db.Column(db.DateTime, server_default=db.func.now())
 
-    def __init__(self, username, password):
+    def __init__(self, username, role):
         self.username = username
-        self.password = password
+        self.role = role
 
     def __repr__(self):
-        return f"<User {self.username}>"
+        return f"<User {self.id}>"
