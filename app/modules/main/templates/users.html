@@ -34,7 +34,7 @@
     <div class="card">
         <div class="card-body">
             <div class="container">
-                <table id="example" class="display" width="100%">
+                <table id="users" class="display" width="100%">
                     {% for user in all_users %}
                         <tbody>
                             <tr>
@@ -66,14 +66,17 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 
     <script>
-        new DataTable('#example', {
+        new DataTable('#users', {
             columns: [
                 { title: 'ID' },
                 { title: 'Username' },
                 { title: 'Função' },
                 { title: 'Último Login' },
                 { title: 'Ações' }
-            ]
+            ],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pt-PT.json',
+            }
         });
     </script>
 {% endblock %}
