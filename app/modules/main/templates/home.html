@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Dashboard, ModaLda">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="static/img/icons/icon-48x48.png"/>
+
+    <title>Home | ModaLda </title>
+
+    <link href="static/css/dashboard.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+{% extends 'sidebar.html' %}
+{% block content %}
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-7 d-flex">
+            <div class="border border-white-subtle rounded-3">
+                <h1 class="h3 mb-3 p-3"><strong>Quicklinks</strong></h1>
+                <div class="row m-2">
+                    <button class="btn btn-primary p-3 m-2" style="width: 100px">Adicionar Utilizador</button>
+                    <button class="btn btn-primary p-3 m-2" style="width: 100px">Adicionar Armazém</button>
+                    <button class="btn btn-primary p-3 m-2" style="width: 100px">Ver Utilizadores</button>
+                    <button class="btn btn-primary p-3 m-2" style="width: 100px">Ver Armazéns</button>
+                </div>
+                <div class="row m-2">
+                    <button class="btn btn-primary p-3 m-2" style="width: 100px">Adicionar Utilizador</button>
+                    <button class="btn btn-primary p-3 m-2" style="width: 100px">Adicionar Armazém</button>
+                    <button class="btn btn-primary p-3 m-2" style="width: 100px">Ver Utilizadores</button>
+                    <button class="btn btn-primary p-3 m-2" style="width: 100px">Ver Armazéns</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
