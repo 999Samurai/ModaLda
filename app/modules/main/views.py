@@ -31,4 +31,10 @@ def users():
             }
         )
 
-    return render_template('users.html', user=current_user, tab="users", all_users=all_users)
+    return render_template('users/users_table.html', user=current_user, tab="users", all_users=all_users)
+
+@bp.route('/users/<int:id>')
+@login_required
+def view_user(id):
+    user_view = User.query.filter_by(id=id).first_or_404()
+    return render_template('users/users_view.html', user=current_user, tab="users", user_view=user_view)

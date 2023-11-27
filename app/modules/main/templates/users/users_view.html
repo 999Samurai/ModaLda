@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Dashboard, ModaLda">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="static/img/icons/icon-48x48.png"/>
+
+    <title>Users | ModaLda </title>
+
+   <link href="/static/css/dashboard.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+{% extends 'sidebar.html' %}
+{% block content %}
+    <div class="row">
+        <h1 class="h3 mb-3">Ver Utilizador</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="container-fluid">
+                {{ user_view }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
