@@ -5,3 +5,4 @@ psycopg2-binary
 Werkzeug==2.3.0
 Flask-WTF==1.2.1
 flask-login
+wtforms~=3.1.0

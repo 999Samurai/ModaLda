@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Dashboard, ModaLda">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="/static/img/icons/icon-48x48.png"/>
+
+    <title>Adicionar Utilizador | ModaLda </title>
+
+   <link href="/static/css/dashboard.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+{% extends 'sidebar.html' %}
+{% block content %}
+    <div class="row">
+        <h1 class="h3 mb-3">Adicionar Utilizador</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="container-fluid">
+                {% for field, errors in form.errors.items() %}
+                    <div class="alert alert-warning p-3" role="alert">
+                        {{ form[field].label }}: {{ ', '.join(errors) }}
+                    </div>
+                {% endfor %}
+
+                <form action="/users/add" method="post">
+                    {{ form.csrf_token }}
+                    <div class="row">
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.username.label(class_="form-label") }}
+                            {{ form.username(class_="form-control") }}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.password.label(class_="form-label") }}
+                            {{ form.password(class_="form-control") }}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.role.label(class_="form-label") }}
+                            {{ form.role(class_="form-select") }}
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary float-end">Submeter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

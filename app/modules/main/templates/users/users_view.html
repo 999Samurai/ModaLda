@@ -8,9 +8,9 @@
     <meta name="description" content="Admin Dashboard, ModaLda">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="shortcut icon" href="static/img/icons/icon-48x48.png"/>
+    <link rel="shortcut icon" href="/static/img/icons/icon-48x48.png"/>
 
-    <title>Users | ModaLda </title>
+    <title>Ver Utilizador | ModaLda </title>
 
    <link href="/static/css/dashboard.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -26,7 +26,33 @@
     <div class="card">
         <div class="card-body">
             <div class="container-fluid">
-                {{ user_view }}
+                <div class="row">
+                    <div class="col-12 col-md-6 mt-2">
+                        <label for="username" class="form-label">Username</label>
+                        <input class="form-control" id="username" value="{{ user_view.username }}" disabled="disabled">
+                    </div>
+                    <div class="col-12 col-md-6 mt-2">
+                        <label for="role" class="form-label">Cargo</label>
+                        <input class="form-control" id="role" value="{{ user_view.role }}" disabled="disabled">
+                    </div>
+                    <div class="col-12 col-md-12 mt-3">
+                        <label for="lastLogin" class="form-label">Último Login</label>
+                        <input class="form-control" id="lastLogin" value="{{ user_view.last_login }}" disabled="disabled">
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col">
+                        {% if prev is not none %}
+                            <a href="/users/{{ prev }}" class="btn btn-primary"> < Anterior</a>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {% if next is not none %}
+                            <a href="/users/{{ next }}" class="btn btn-primary float-end">Próximo ></a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

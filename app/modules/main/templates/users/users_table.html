@@ -8,12 +8,12 @@
     <meta name="description" content="Admin Dashboard, ModaLda">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="shortcut icon" href="static/img/icons/icon-48x48.png"/>
+    <link rel="shortcut icon" href="/static/img/icons/icon-48x48.png"/>
 
-    <title>Users | ModaLda </title>
+    <title>Utilizadores | ModaLda </title>
 
     <link href="/static/css/dashboard.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -26,7 +26,7 @@
 
         <div class="col">
             <div class="mb-3 float-end">
-                <button class="btn btn-primary">Adicionar Utilizador</button>
+                <a href="/users/add" class="btn btn-primary">Adicionar Utilizador</a>
             </div>
         </div>
     </div>
@@ -34,7 +34,15 @@
     <div class="card">
         <div class="card-body">
             <div class="container-fluid">
-                <table id="users">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert alert-success p-3" role="alert">
+                            {{ messages[0] }}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <table id="users" class="table table-striped">
                     {% for user in all_users %}
                         <tbody>
                             <tr>
@@ -64,6 +72,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
         new DataTable('#users', {
