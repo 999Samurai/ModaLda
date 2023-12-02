@@ -78,11 +78,11 @@
     <script>
         new DataTable('#users', {
             columns: [
-                { title: 'ID' },
-                { title: 'Username' },
-                { title: 'Função' },
+                { title: 'ID', responsivePriority: 1 },
+                { title: 'Username', responsivePriority: 2 },
+                { title: 'Função', responsivePriority: 3 },
                 { title: 'Último Login' },
-                { title: 'Ações' }
+                { title: 'Ações', responsivePriority: 4 }
             ],
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pt-PT.json',

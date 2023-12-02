@@ -86,10 +86,10 @@
     <script>
         new DataTable('#products', {
             columns: [
-                { title: 'ID' },
-                { title: 'Nome' },
-                { title: 'Categoria' },
-                { title: 'Cor' },
+                { title: 'ID', responsivePriority: 1 },
+                { title: 'Nome', responsivePriority: 2 },
+                { title: 'Categoria', responsivePriority: 3 },
+                { title: 'Cor', responsivePriority: 4 },
                 { title: 'Marca' },
                 { title: 'Stock Min' },
                 { title: 'Stock Max' },
@@ -98,7 +98,7 @@
                 { title: 'Preço Médio' },
                 { title: 'Preço' },
                 { title: 'Descrição' },
-                { title: 'Ações' }
+                { title: 'Ações', responsivePriority: 5 }
             ],
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pt-PT.json',
