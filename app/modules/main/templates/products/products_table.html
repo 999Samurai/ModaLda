@@ -43,35 +43,35 @@
                 {% endwith %}
 
                 <table id="products" class="table table-striped">
+                    <tbody>
                     {% for product in all_products %}
-                        <tbody>
-                            <tr>
-                                <td>{{ product.id }}</td>
-                                <td>{{ product.name }}</td>
-                                <td>{{ product.category }}</td>
-                                <td>{{ product.color }}</td>
-                                <td>{{ product.brand }}</td>
-                                <td>{{ product.min_stock }}</td>
-                                <td>{{ product.max_stock }}</td>
-                                <td>{{ product.current_stock }}</td>
-                                <td>{{ product.last_buy_price }}</td>
-                                <td>{{ product.avg_buy_price }}</td>
-                                <td>{{ product.sell_price }}</td>
-                                <td>{{ product.desc }}</td>
-                                <td>
-                                    <a class="text-decoration-none" href="/products/{{ product.id }}">
-                                        <i class="align-middle" data-feather="search"></i>
-                                    </a>
-                                    <a class="text-decoration-none" href="/products/edit/{{ product.id }}">
-                                        <i class="align-middle text-warning" data-feather="edit"></i>
-                                    </a>
-                                    <a class="text-decoration-none">
-                                        <i class="align-middle text-danger" data-feather="trash-2"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tr>
+                            <td>{{ product.id }}</td>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.category }}</td>
+                            <td>{{ product.color }}</td>
+                            <td>{{ product.brand }}</td>
+                            <td>{{ product.min_stock }}</td>
+                            <td>{{ product.max_stock }}</td>
+                            <td>{{ product.current_stock }}</td>
+                            <td>{{ product.last_buy_price }}</td>
+                            <td>{{ product.avg_buy_price }}</td>
+                            <td>{{ product.sell_price }}</td>
+                            <td>{{ product.desc }}</td>
+                            <td>
+                                <a class="text-decoration-none" href="/products/{{ product.id }}">
+                                    <i class="align-middle" data-feather="search"></i>
+                                </a>
+                                <a class="text-decoration-none" href="/products/edit/{{ product.id }}">
+                                    <i class="align-middle text-warning" data-feather="edit"></i>
+                                </a>
+                                <a class="text-decoration-none">
+                                    <i class="align-middle text-danger" data-feather="trash-2"></i>
+                                </a>
+                            </td>
+                        </tr>
                     {% endfor %}
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -81,6 +81,7 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 
     <script>
         new DataTable('#products', {
@@ -97,11 +98,12 @@
                 { title: 'Preço Médio' },
                 { title: 'Preço' },
                 { title: 'Descrição' },
-                { title: 'Ações' },
+                { title: 'Ações' }
             ],
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pt-PT.json',
-            }
+            },
+            responsive: true
         });
     </script>
 {% endblock %}
