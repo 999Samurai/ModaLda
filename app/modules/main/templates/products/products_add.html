@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Dashboard, ModaLda">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="/static/img/icons/icon-48x48.png"/>
+
+    <title>Adicionar Produto | ModaLda </title>
+
+   <link href="/static/css/dashboard.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+{% extends 'sidebar.html' %}
+{% block content %}
+    <div class="row">
+        <h1 class="h3 mb-3">Adicionar Produto</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="container-fluid">
+                {% for field, errors in form.errors.items() %}
+                    <div class="alert alert-warning p-3" role="alert">
+                        {{ form[field].label }}: {{ ', '.join(errors) }}
+                    </div>
+                {% endfor %}
+
+                <form action="/products/add" method="post">
+                    {{ form.csrf_token }}
+                    <div class="row">
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.name.label(class_="form-label") }}
+                            {{ form.name(class_="form-control") }}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.category.label(class_="form-label") }}
+                            {{ form.category(class_="form-select") }}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.color.label(class_="form-label") }}
+                            {{ form.color(class_="form-control") }}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.brand.label(class_="form-label") }}
+                            {{ form.brand(class_="form-control") }}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.min_stock.label(class_="form-label") }}
+                            {{ form.min_stock(class_="form-control") }}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.max_stock.label(class_="form-label") }}
+                            {{ form.max_stock(class_="form-control") }}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.current_stock.label(class_="form-label") }}
+                            {{ form.current_stock(class_="form-control") }}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.last_buy_price.label(class_="form-label") }}
+                            {{ form.last_buy_price(class_="form-control") }}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.avg_buy_price.label(class_="form-label") }}
+                            {{ form.avg_buy_price(class_="form-control") }}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.sell_price.label(class_="form-label") }}
+                            {{ form.sell_price(class_="form-control") }}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.desc.label(class_="form-label") }}
+                            {{ form.desc(class_="form-control") }}
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary float-end">Submeter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

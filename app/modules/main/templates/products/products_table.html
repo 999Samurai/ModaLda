@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Dashboard, ModaLda">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="/static/img/icons/icon-48x48.png"/>
+
+    <title>Produtos | ModaLda </title>
+
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+{% extends 'sidebar.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col float-start">
+            <h1 class="h3 mb-3">Produtos</h1>
+        </div>
+
+        <div class="col">
+            <div class="mb-3 float-end">
+                <a href="/products/add" class="btn btn-primary">Adicionar Produto</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="container-fluid">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert alert-success p-3" role="alert">
+                            {{ messages[0] }}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <table id="products" class="table table-striped">
+                    {% for product in all_products %}
+                        <tbody>
+                            <tr>
+                                <td>{{ product.id }}</td>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.category }}</td>
+                                <td>{{ product.color }}</td>
+                                <td>{{ product.brand }}</td>
+                                <td>{{ product.min_stock }}</td>
+                                <td>{{ product.max_stock }}</td>
+                                <td>{{ product.current_stock }}</td>
+                                <td>{{ product.last_buy_price }}</td>
+                                <td>{{ product.avg_buy_price }}</td>
+                                <td>{{ product.sell_price }}</td>
+                                <td>{{ product.desc }}</td>
+                                <td>
+                                    <a class="text-decoration-none" href="/products/{{ product.id }}">
+                                        <i class="align-middle" data-feather="search"></i>
+                                    </a>
+                                    <a class="text-decoration-none" href="/products/edit/{{ product.id }}">
+                                        <i class="align-middle text-warning" data-feather="edit"></i>
+                                    </a>
+                                    <a class="text-decoration-none">
+                                        <i class="align-middle text-danger" data-feather="trash-2"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        new DataTable('#products', {
+            columns: [
+                { title: 'ID' },
+                { title: 'Nome' },
+                { title: 'Categoria' }
+                { title: 'Cor' }
+                { title: 'Marca' }
+                { title: 'Stock Min' }
+                { title: 'Stock Max' }
+                { title: 'Stock' }
+                { title: 'Último Preço' }
+                { title: 'Preço Médio' }
+                { title: 'Preço' },
+                { title: 'Descrição' },
+            ],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pt-PT.json',
+            }
+        });
+    </script>
+{% endblock %}
