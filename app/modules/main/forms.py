@@ -11,7 +11,14 @@ class AddUserForm(FlaskForm):
         default="funcionario",
         validators=[InputRequired()]
     )
-    
+
+
+class AddWarehouseForm(FlaskForm):
+    name = StringField('Nome', validators=[InputRequired(), validators.length(max=32)])
+    address = StringField('Morada', validators=[InputRequired(), validators.length(max=45)])
+    phone = StringField('Número de Telemóvel', validators=[InputRequired(), validators.length(min=9, max=15)])
+
+
 class AddProductForm(FlaskForm):
     name = StringField('Nome', validators=[InputRequired(), validators.length(max=32)])
     category = SelectField('Categoria',

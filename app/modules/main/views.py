@@ -1,10 +1,10 @@
 from flask import render_template, redirect, flash, request
 from flask_login import login_required, current_user
-from .forms import AddUserForm, AddProductForm
+from .forms import AddUserForm, AddProductForm, AddWarehouseForm
 
 from . import bp
 from ..login.models import User
-from .models import Product
+from .models import Product, Warehouse
 from database import db
 
 ROLES = {
@@ -113,7 +113,67 @@ def view_user(id):
 
     return render_template('users/users_view.html', user=current_user, tab="users",
                            user_view=user, next=next, prev=prev)
-    
+
+
+@bp.route('/warehouses')
+@login_required
+def warehouses():
+    warehouses_query = Warehouse.query.all()
+
+    return render_template('warehouses/warehouses_table.html', user=current_user, tab="warehouses",
+                           all_warehouses=warehouses_query)
+
+
+@bp.route('/warehouses/add')
+@login_required
+def add_warehouses_get():
+    form = AddWarehouseForm()
+
+    return render_template('warehouses/warehouses_add.html', user=current_user, tab="warehouses", form=form)
+
+
+@bp.route('/warehouses/add', methods=['POST'])
+@login_required
+def add_warehouses_post():
+    form = AddWarehouseForm()
+    if form.validate_on_submit():
+        name = request.form.get('name')
+        address = request.form.get('address')
+        phone = request.form.get("phone")
+
+        record = Warehouse(name, address, phone)
+        db.session.add(record)
+        db.session.commit()
+
+        flash('Armazém criado com sucesso')
+        return redirect('/warehouses')
+
+    return render_template('warehouses/warehouses_add.html', user=current_user, tab="warehouses", form=form)
+
+
+@bp.route('/warehouses/<int:id>')
+@login_required
+def view_warehouses(id):
+    warehouse = Warehouse.query.filter_by(id=id).first_or_404()
+
+    prev = Warehouse.query.order_by(Warehouse.id.desc()).filter(Warehouse.id < warehouse.id).first()
+    next = Warehouse.query.order_by(Warehouse.id.asc()).filter(Warehouse.id > warehouse.id).first()
+
+    if prev is not None:
+        prev = prev.id
+
+    if next is not None:
+        next = next.id
+
+    # Testing purposes
+    # if prev is None and next is None:
+    #     prev = 0
+    #     next = 2
+
+    return render_template('warehouses/warehouses_view.html', user=current_user, tab="warehouses",
+                           warehouse_view=warehouse, next=next, prev=prev)
+
+
 @bp.route('/products')
 @login_required
 def products():

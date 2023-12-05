@@ -1,6 +1,21 @@
 from database import db
 
 
+class Warehouse(db.Model):
+    __tablename__ = 'warehouses'
+    __table_args__ = {'extend_existing': True}
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(), unique=True)
+    address = db.Column(db.String())
+    phone = db.Column(db.String())
+
+    def __init__(self, name, address, phone):
+        self.name = name
+        self.address = address
+        self.phone = phone
+
+
 class Product(db.Model):
     __tablename__ = 'products'
     __table_args__ = {'extend_existing': True}
