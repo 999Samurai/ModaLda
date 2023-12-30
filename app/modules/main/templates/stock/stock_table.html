@@ -21,7 +21,13 @@
 {% block content %}
     <div class="row">
         <div class="col float-start">
-            <h1 class="h3 mb-3">Stock - {{ warehouse.name }}</h1>
+            <h1 class="h3 mb-3">Stock
+                {% if warehouse is not none %}
+                    - {{ warehouse.name }}
+                {% else %}
+                    - Total
+                {% endif %}
+            </h1>
         </div>
     </div>
 
@@ -40,6 +46,7 @@
                     <tbody>
                     {% for product in products %}
                         <tr>
+                            <td>{{ product.id }}</td>
                             <td>{{ product.name }}</td>
                             {% if product.quantity is not none %}
                                 <td>{{ product.quantity }}</td>
@@ -68,6 +75,7 @@
     <script>
         new DataTable('#products', {
             columns: [
+                { title: 'ID' },
                 { title: 'Nome', width: "80%"},
                 { title: 'Quantidade' },
                 { title: 'Ações', width: "60px" }
