@@ -27,7 +27,6 @@ class Product(db.Model):
     brand = db.Column(db.String())
     min_stock = db.Column(db.Integer())
     max_stock = db.Column(db.Integer())
-    current_stock = db.Column(db.Integer())
     last_buy_price = db.Column(db.Float())
     avg_buy_price = db.Column(db.Float())
     sell_price = db.Column(db.Float())

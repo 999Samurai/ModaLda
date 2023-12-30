@@ -30,7 +30,6 @@ class AddProductForm(FlaskForm):
         validators=[InputRequired()])
     min_stock = IntegerField('Stock Min', validators=[InputRequired(), validators.NumberRange(min=1)])
     max_stock = IntegerField('Stock Max', validators=[InputRequired(), validators.NumberRange(min=1)])
-    current_stock = IntegerField('Stock', validators=[InputRequired(), validators.NumberRange(min=1)])
     last_buy_price = DecimalField('Último Preço', validators=[InputRequired(), validators.NumberRange(min=0.01)])
     avg_buy_price = DecimalField('Preço Médio', validators=[InputRequired(), validators.NumberRange(min=0.01)])
     sell_price = DecimalField('Preço', validators=[InputRequired(), validators.NumberRange(min=0.01)])
