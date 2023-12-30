@@ -1,4 +1,6 @@
 from database import db
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
 
 
 class Warehouse(db.Model):
@@ -51,3 +53,22 @@ class Product(db.Model):
 
     #def __repr__(self):
     #   return f"<User {self.id}>"
+
+
+class Product_Warehouse(db.Model):
+    __tablename__ = 'products_warehouses'
+    __table_args__ = {'extend_existing': True}
+
+    product_id = db.Column(db.Integer, ForeignKey(Product.id), primary_key=True)
+    warehouse_id = db.Column(db.Integer, ForeignKey(Warehouse.id), primary_key=True)
+    quantity = db.Column(db.Integer)
+
+    product = relationship('Product', foreign_keys='Product_Warehouse.product_id')
+    warehouse = relationship('Warehouse', foreign_keys='Product_Warehouse.warehouse_id')
+
+    def __init__(
+            self, product_id, warehouse_id, quantity):
+        self.product_id = product_id
+        self.warehouse_id = warehouse_id
+        self.quantity = quantity
+
