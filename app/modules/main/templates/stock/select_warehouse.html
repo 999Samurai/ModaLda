@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Dashboard, ModaLda">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="/static/img/icons/icon-48x48.png"/>
+
+    <title>Stock | ModaLda </title>
+
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+{% extends 'sidebar.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col float-start">
+            <h1 class="h3 mb-3">Stock</h1>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <h4 class="h4 mb-3">Selecione uma opção</h4>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center">
+                        <a href="/stock/all" class="btn btn-primary p-4">Ver Todos</a>
+                    </div>
+                </div>
+
+                <hr style="border-bottom: 1px solid grey">
+
+                <div class="row d-flex justify-content-center">
+                    {% for warehouse in warehouses %}
+                        <a href="/stock/{{ warehouse.id }}" class="btn btn-primary p-3 m-1 col-3">
+                            {{ warehouse.name }}<br>
+                            {{ warehouse.address }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
