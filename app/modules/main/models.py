@@ -44,7 +44,6 @@ class Product(db.Model):
         self.brand = brand
         self.min_stock = min_stock
         self.max_stock = max_stock
-        self.current_stock = current_stock
         self.last_buy_price = last_buy_price
         self.avg_buy_price = avg_buy_price
         self.sell_price = sell_price
