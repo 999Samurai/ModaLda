@@ -190,7 +190,6 @@ def products():
                 "brand": BRANDS[product.brand],
                 "min_stock": product.min_stock,
                 "max_stock": product.max_stock,
-                "current_stock": product.current_stock,
                 "last_buy_price": product.last_buy_price,
                 "avg_buy_price": product.avg_buy_price,
                 "sell_price": product.sell_price,
@@ -220,7 +219,6 @@ def add_product_post():
         brand = request.form.get('brand')
         min_stock = request.form.get('min_stock')
         max_stock = request.form.get('max_stock')
-        current_stock = request.form.get('current_stock')
         last_buy_price = request.form.get('last_buy_price')
         avg_buy_price = request.form.get('avg_buy_price')
         sell_price = request.form.get('sell_price')
