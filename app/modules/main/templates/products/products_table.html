@@ -26,7 +26,7 @@
 
         <div class="col">
             <div class="mb-3 float-end">
-                <a href="/products/all/add" class="btn btn-primary">Adicionar Produto</a>
+                <a href="/products/add" class="btn btn-primary">Adicionar Produto</a>
             </div>
         </div>
     </div>
@@ -59,10 +59,10 @@
                             <td>{{ product.sell_price }}</td>
                             <td>{{ product.desc }}</td>
                             <td>
-                                <a class="text-decoration-none" href="/products/all/{{ product.id }}">
+                                <a class="text-decoration-none" href="/products/{{ product.id }}">
                                     <i class="align-middle" data-feather="search"></i>
                                 </a>
-                                <a class="text-decoration-none" href="/products/all/edit/{{ product.id }}">
+                                <a class="text-decoration-none" href="/products/edit/{{ product.id }}">
                                     <i class="align-middle text-warning" data-feather="edit"></i>
                                 </a>
                                 <a class="text-decoration-none">

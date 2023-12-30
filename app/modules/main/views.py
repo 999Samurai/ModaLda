@@ -174,7 +174,7 @@ def view_warehouses(id):
                            warehouse_view=warehouse, next=next, prev=prev)
 
 
-@bp.route('/products/all')
+@bp.route('/products')
 @login_required
 def products():
     products_query = Product.query.all()
@@ -198,18 +198,18 @@ def products():
             }
         )
 
-    return render_template('products/products_table.html', user=current_user, tab="products.all", all_products=all_products)
+    return render_template('products/products_table.html', user=current_user, tab="products", all_products=all_products)
 
 
-@bp.route('/products/all/add')
+@bp.route('/products/add')
 @login_required
 def add_product_get():
     form = AddProductForm()
 
-    return render_template('products/products_add.html', user=current_user, tab="products.all", form=form)
+    return render_template('products/products_add.html', user=current_user, tab="products", form=form)
 
 
-@bp.route('/products/all/add', methods=['POST'])
+@bp.route('/products/add', methods=['POST'])
 @login_required
 def add_product_post():
     form = AddProductForm()
@@ -233,4 +233,4 @@ def add_product_post():
         flash('Produto criado com sucesso')
         return redirect('/products')
 
-    return render_template('products/products_add.html', user=current_user, tab="products.all", form=form)
+    return render_template('products/products_add.html', user=current_user, tab="products", form=form)

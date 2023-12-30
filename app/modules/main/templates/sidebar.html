@@ -36,14 +36,16 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {% if 'products' in tab %}active{% endif %}">
-                    <a data-bs-target="#products_dropdown" data-bs-toggle="collapse" class="sidebar-link {% if 'products' not in tab %}collapsed{% endif %}" aria-expanded="false">
+                <li class="sidebar-item {% if tab == 'products' %}active{% endif %}">
+                    <a class="sidebar-link" href="/products">
                         <i class="align-middle" data-feather="archive"></i> <span class="align-middle">Produtos</span>
                     </a>
-                    <ul id="products_dropdown" class="sidebar-dropdown list-unstyled {% if 'products' not in tab %}collapse{% endif %}" data-bs-parent="#sidebar" style="">
-                        <li class="sidebar-item {% if tab == 'products.all' %}active{% endif %}"><a class="sidebar-link" href="/products/all">Registo</a></li>
-                        <li class="sidebar-item {% if tab == 'products.stock' %}active{% endif %}"><a class="sidebar-link" href="/products/stock">Stock</a></li>
-                    </ul>
+                </li>
+
+                <li class="sidebar-item {% if tab == 'stock' %}active{% endif %}">
+                    <a class="sidebar-link" href="/stock">
+                        <i class="align-middle" data-feather="layers"></i> <span class="align-middle">Stock</span>
+                    </a>
                 </li>
 
                 <li class="sidebar-item {% if tab == 'movimentos' %}active{% endif %}">
