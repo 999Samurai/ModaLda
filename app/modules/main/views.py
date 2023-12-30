@@ -246,6 +246,26 @@ def stock():
     return render_template('stock/select_warehouse.html', user=current_user, tab="stock",
                            warehouses=warehouses_query)
 
+@bp.route('/stock/all')
+@login_required
+def view_stock():
+    query = text('''
+        SELECT
+            products.id as id,
+            products.name AS name,
+            SUM(products_warehouses.quantity) AS quantity
+        FROM
+            products
+        LEFT JOIN
+            products_warehouses ON products.id = products_warehouses.product_id
+        GROUP BY
+            products.id
+    ''')
+
+    result = db.session.execute(query)
+    return render_template('stock/stock_table.html', user=current_user, tab="stock", warehouse=None, products=result)
+
+
 
 @bp.route('/stock/<int:id>')
 @login_required
@@ -254,6 +274,7 @@ def view_stock_warehouses(id):
 
     query = text('''
         SELECT
+            products.id as id,
             products.name AS name,
             products_warehouses.quantity AS quantity
         FROM
