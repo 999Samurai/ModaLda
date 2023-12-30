@@ -24,13 +24,11 @@
                     Gestão
                 </li>
 
-
                 <li class="sidebar-item {% if tab == 'users' %}active{% endif %}">
                     <a class="sidebar-link" href="/users">
                         <i class="align-middle" data-feather="users"></i> <span class="align-middle">Utilizadores</span>
                     </a>
                 </li>
-
 
                 <li class="sidebar-item {% if tab == 'warehouses' %}active{% endif %}">
                     <a class="sidebar-link" href="/warehouses">
@@ -38,10 +36,14 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {% if tab == 'products' %}active{% endif %}">
-                    <a class="sidebar-link" href="/products">
+                <li class="sidebar-item {% if 'products' in tab %}active{% endif %}">
+                    <a data-bs-target="#products_dropdown" data-bs-toggle="collapse" class="sidebar-link {% if 'products' not in tab %}collapsed{% endif %}" aria-expanded="false">
                         <i class="align-middle" data-feather="archive"></i> <span class="align-middle">Produtos</span>
                     </a>
+                    <ul id="products_dropdown" class="sidebar-dropdown list-unstyled {% if 'products' not in tab %}collapse{% endif %}" data-bs-parent="#sidebar" style="">
+                        <li class="sidebar-item {% if tab == 'products.all' %}active{% endif %}"><a class="sidebar-link" href="/products/all">Registo</a></li>
+                        <li class="sidebar-item {% if tab == 'products.stock' %}active{% endif %}"><a class="sidebar-link" href="/products/stock">Stock</a></li>
+                    </ul>
                 </li>
 
                 <li class="sidebar-item {% if tab == 'movimentos' %}active{% endif %}">
