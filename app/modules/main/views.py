@@ -1,10 +1,13 @@
 from flask import render_template, redirect, flash, request
 from flask_login import login_required, current_user
+from sqlalchemy import text
+
+
 from .forms import AddUserForm, AddProductForm, AddWarehouseForm
 
 from . import bp
 from ..login.models import User
-from .models import Product, Warehouse
+from .models import Product, Warehouse, Product_Warehouse
 from database import db
 
 ROLES = {
@@ -234,3 +237,32 @@ def add_product_post():
         return redirect('/products')
 
     return render_template('products/products_add.html', user=current_user, tab="products", form=form)
+
+@bp.route('/stock')
+@login_required
+def stock():
+    warehouses_query = Warehouse.query.all()
+
+    return render_template('stock/select_warehouse.html', user=current_user, tab="stock",
+                           warehouses=warehouses_query)
+
+
+@bp.route('/stock/<int:id>')
+@login_required
+def view_stock_warehouses(id):
+    warehouse = Warehouse.query.filter_by(id=id).first_or_404()
+
+    query = text('''
+        SELECT
+            products.name AS name,
+            products_warehouses.quantity AS quantity
+        FROM
+            products
+        LEFT JOIN
+            products_warehouses ON products.id = products_warehouses.product_id
+        LEFT JOIN
+            warehouses ON products_warehouses.warehouse_id = :warehouse_id
+    ''')
+
+    result = db.session.execute(query, {'warehouse_id': id})
+    return render_template('stock/stock_table.html', user=current_user, tab="stock", warehouse=warehouse, products=result)
