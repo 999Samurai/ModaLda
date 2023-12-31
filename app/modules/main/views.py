@@ -1,4 +1,4 @@
-from flask import render_template, redirect, flash, request
+from flask import render_template, redirect, flash, request, url_for, abort
 from flask_login import login_required, current_user
 from sqlalchemy import text
 
@@ -30,6 +30,12 @@ BRANDS = {
     'springfield': 'Springfield'
 }
 
+
+@bp.route('/<input>')
+@login_required
+def serve(input):
+    return redirect("/"+ input) #abort(404)
+
 @bp.route('/home')
 @login_required
 def home():
@@ -46,7 +52,6 @@ def dashboard():
 @login_required
 def users():
     users_query = User.query.with_entities(User.id, User.username, User.role, User.last_login).all()
-
     all_users = []
     for user in users_query:
         all_users.append(
@@ -57,17 +62,21 @@ def users():
                 "last_login": user.last_login.strftime("%d/%m/%Y, %H:%M:%S")
             }
         )
-
-    return render_template('users/users_table.html', user=current_user, tab="users", all_users=all_users)
+    if current_user.role == 'admin' or current_user.role == 'gerente':
+        return render_template('users/users_table.html', user=current_user, tab="users", all_users=all_users)
+    else:
+        #abort(404)
+        return redirect(request.referrer or 'home')
 
 
 @bp.route('/users/add')
 @login_required
 def add_user_get():
     form = AddUserForm()
-
-    return render_template('users/users_add.html', user=current_user, tab="users", form=form)
-
+    if current_user.role == 'admin' or current_user.role == 'gerente':
+        return render_template('users/users_add.html', user=current_user, tab="users", form=form)
+    else:
+        return redirect(request.referrer or 'home')
 
 @bp.route('/users/add', methods=['POST'])
 @login_required
@@ -84,8 +93,10 @@ def add_user_post():
 
         flash('Utilizador criado com sucesso')
         return redirect('/users')
-
-    return render_template('users/users_add.html', user=current_user, tab="users", form=form)
+    if current_user.role == 'admin' or current_user.role == 'gerente':
+        return render_template('users/users_add.html', user=current_user, tab="users", form=form)
+    else:
+        return redirect(request.referrer or 'home')
 
 
 @bp.route('/users/<int:id>')
@@ -113,27 +124,32 @@ def view_user(id):
     # if prev is None and next is None:
     #     prev = 0
     #     next = 2
-
-    return render_template('users/users_view.html', user=current_user, tab="users",
-                           user_view=user, next=next, prev=prev)
+    if current_user.role == 'admin' or current_user.role == 'gerente':
+        return render_template('users/users_view.html', user=current_user, tab="users",
+                               user_view=user, next=next, prev=prev)
+    else:
+        return redirect(request.referrer or 'home')
 
 
 @bp.route('/warehouses')
 @login_required
 def warehouses():
     warehouses_query = Warehouse.query.all()
-
-    return render_template('warehouses/warehouses_table.html', user=current_user, tab="warehouses",
-                           all_warehouses=warehouses_query)
+    if current_user.role == 'admin' or current_user.role == 'gerente':
+        return render_template('warehouses/warehouses_table.html', user=current_user, tab="warehouses",
+                               all_warehouses=warehouses_query)
+    else:
+        return redirect(request.referrer or 'home')
 
 
 @bp.route('/warehouses/add')
 @login_required
 def add_warehouses_get():
     form = AddWarehouseForm()
-
-    return render_template('warehouses/warehouses_add.html', user=current_user, tab="warehouses", form=form)
-
+    if current_user.role == 'admin' or current_user.role == 'gerente':
+        return render_template('warehouses/warehouses_add.html', user=current_user, tab="warehouses", form=form)
+    else:
+        return redirect(request.referrer or 'home')
 
 @bp.route('/warehouses/add', methods=['POST'])
 @login_required
@@ -150,9 +166,10 @@ def add_warehouses_post():
 
         flash('Armazém criado com sucesso')
         return redirect('/warehouses')
-
-    return render_template('warehouses/warehouses_add.html', user=current_user, tab="warehouses", form=form)
-
+    if current_user.role == 'admin' or current_user.role == 'gerente':
+        return render_template('warehouses/warehouses_add.html', user=current_user, tab="warehouses", form=form)
+    else:
+        return redirect(request.referrer or 'home')
 
 @bp.route('/warehouses/<int:id>')
 @login_required
@@ -172,10 +189,11 @@ def view_warehouses(id):
     # if prev is None and next is None:
     #     prev = 0
     #     next = 2
-
-    return render_template('warehouses/warehouses_view.html', user=current_user, tab="warehouses",
-                           warehouse_view=warehouse, next=next, prev=prev)
-
+    if current_user.role == 'admin' or current_user.role == 'gerente':
+        return render_template('warehouses/warehouses_view.html', user=current_user, tab="warehouses",
+                               warehouse_view=warehouse, next=next, prev=prev)
+    else:
+        return redirect(request.referrer or 'home')
 
 @bp.route('/products')
 @login_required

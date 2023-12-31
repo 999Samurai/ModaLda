@@ -23,18 +23,21 @@
                 <li class="sidebar-header">
                     Gestão
                 </li>
-
+                {% if user.role == 'admin' or user.role == 'gerente' %}
                 <li class="sidebar-item {% if tab == 'users' %}active{% endif %}">
                     <a class="sidebar-link" href="/users">
                         <i class="align-middle" data-feather="users"></i> <span class="align-middle">Utilizadores</span>
                     </a>
                 </li>
+                {% endif %}
 
+                {% if user.role == 'admin' or user.role == 'gerente' %}
                 <li class="sidebar-item {% if tab == 'warehouses' %}active{% endif %}">
                     <a class="sidebar-link" href="/warehouses">
                         <i class="align-middle" data-feather="package"></i> <span class="align-middle">Armazéns</span>
                     </a>
                 </li>
+                {% endif %}
 
                 <li class="sidebar-item {% if tab == 'products' %}active{% endif %}">
                     <a class="sidebar-link" href="/products">
