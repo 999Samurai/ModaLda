@@ -372,3 +372,11 @@ def movements():
 
     return render_template('movements/movements_table.html', user=current_user, tab="movements",
                            all_movements=all_movements)
+
+
+@bp.route('/movements/add')
+@login_required
+def add_movements_get():
+    warehouses = Warehouse.query.all()
+
+    return render_template("movements/movements_add.html", user=current_user, tab="movements", warehouses=warehouses)
