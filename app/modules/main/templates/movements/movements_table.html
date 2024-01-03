@@ -23,6 +23,11 @@
         <div class="col float-start">
             <h1 class="h3 mb-3">Movimentos (Todos)</h1>
         </div>
+        <div class="col">
+            <div class="mb-3 float-end">
+                <a href="/movements/add" class="btn btn-primary">Criar Movimento</a>
+            </div>
+        </div>
     </div>
 
     <div class="card">
@@ -46,6 +51,11 @@
                             <td>{{ movement.user_id }}</td>
                             <td>{{ movement.typ }}</td>
                             <td>{{ movement.date }}</td>
+                            <td>
+                                <a class="text-decoration-none" href="/movements/{{ movement.id }}">
+                                    <i class="align-middle" data-feather="search"></i>
+                                </a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -68,7 +78,8 @@
                 { title: 'Para' },
                 { title: 'Utilizador' },
                 { title: 'Tipo' },
-                { title: 'Data' }
+                { title: 'Data' },
+                { title: 'Ver' }
             ],
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pt-PT.json',
