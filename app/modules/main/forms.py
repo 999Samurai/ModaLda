@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField, validators, DecimalField, IntegerField, QuerySelectField
+from wtforms import StringField, PasswordField, SelectField, validators, DecimalField, IntegerField
 from wtforms.validators import InputRequired
 from models import Warehouse, Product
 from login.models import User
