@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Dashboard, ModaLda">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="/static/img/icons/icon-48x48.png"/>
+
+    <title>Editar stock | ModaLda </title>
+
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+{% extends 'sidebar.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col float-start">
+            <h1 class="h3 mb-3">Editar stock - {{ warehouse.name }}
+            </h1>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="container-fluid">
+                <form method="post" action="">
+                    <div class="row">
+                        <div class="col-8 col-md-10 mt-2">
+                            <label for="product" class="form-label">Produto</label>
+                            <input class="form-control" id="product" value="{{ product.name }}" disabled="disabled">
+                        </div>
+                        <div class="col-4 col-md-2 mt-2">
+                            <label for="stock" class="form-label">Stock</label>
+                            <input class="form-control" id="stock" name="stock" value="{% if product.quantity is none %}0{% else %}{{ product.quantity }}{% endif %}">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">Submeter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+{% endblock %}

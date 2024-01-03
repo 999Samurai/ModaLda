@@ -53,11 +53,13 @@
                             {% else %}
                                 <td>0</td>
                             {% endif %}
-                            <td>
-                                <a class="text-decoration-none" href="/stock/{{ warehouse.id }}/{{ product.id }}">
-                                    <i class="align-middle text-warning" data-feather="edit"></i>
-                                </a>
-                            </td>
+                            {% if warehouse is not none %}
+                                <td>
+                                    <a class="text-decoration-none" href="/stock/{{ warehouse.id }}/products/{{ product.id }}">
+                                        <i class="align-middle text-warning" data-feather="edit"></i>
+                                    </a>
+                                </td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -78,7 +80,9 @@
                 { title: 'ID' },
                 { title: 'Nome', width: "80%"},
                 { title: 'Quantidade' },
-                { title: 'Ações', width: "60px" }
+                {% if warehouse is not none %}
+                    { title: 'Ações', width: "60px" }
+                {% endif %}
             ],
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pt-PT.json',
