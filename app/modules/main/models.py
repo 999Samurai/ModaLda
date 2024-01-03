@@ -83,8 +83,8 @@ class Movements(db.Model):
     user_id = db.Column(db.Integer, ForeignKey(User.id), unique=True)
     from_warehouse_id = db.Column(db.Integer, ForeignKey(Warehouse.id), unique=True) #FromWarehouse
     to_warehouse_id = db.Column(db.Integer, ForeignKey(Warehouse.id), unique=True) #ToWarehouse
-    typ = db.Column(db.String()) #Type of movement {transfer, devolution, break}
-    date = db.Column(db.Date)
+    typ = db.Column(db.String())
+    date = db.Column(db.DateTime, default=db.func.now())
     
     def __init__(self, user_id, from_warehouse_id, to_warehouse_id, date):
         self.user_id = user_id
