@@ -36,22 +36,3 @@ class AddProductForm(FlaskForm):
     avg_buy_price = DecimalField('Preço Médio', validators=[InputRequired(), validators.NumberRange(min=0.01)])
     sell_price = DecimalField('Preço', validators=[InputRequired(), validators.NumberRange(min=0.01)])
     desc = StringField('Descrição', validators=[validators.optional(), validators.length(min=0, max=32)])
-
-
-class AddMovementForm(FlaskForm):
-    from_warehouse = QuerySelectField(query_factory=lambda: Warehouse.query.all(),
-                                    get_pk=lambda a: a.id,
-                                    get_label=lambda a: a.name,
-                                    allow_blank=False,)
-    
-    to_warehouse = QuerySelectField(query_factory=lambda: Warehouse.query.all(),
-                                    get_pk=lambda a: a.id,
-                                    get_label=lambda a: a.name,
-                                    allow_blank=False,)
-    typ = SelectField('Tipo',
-        choices=[('transferência', 'Transferência'), ('devolução', 'Devolução'), ('quebra', 'Quebra')],
-        validators=[InputRequired()])
-    product = QuerySelectField(query_factory=lambda: Product.query.all(),
-                                    get_pk=lambda a: a.id,
-                                    get_label=lambda a: a.
-    quantity = IntegerField('Quantidade', validators=[InputRequired(), validators.NumberRange(min=1)])
