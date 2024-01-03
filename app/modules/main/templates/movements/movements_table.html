@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Dashboard, ModaLda">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="/static/img/icons/icon-48x48.png"/>
+
+    <title>Movimentos | ModaLda </title>
+
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+{% extends "sidebar.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col float-start">
+            <h1 class="h3 mb-3">Movimentos (Todos)</h1>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="container-fluid">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert alert-success p-3" role="alert">
+                            {{ messages[0] }}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <table id="movements" class="table table-striped">
+                    <tbody>
+                    {% for movement in all_movements %}
+                        <tr>
+                            <td>{{ movement.id }}</td>
+                            <td>{{ movement.from_warehouse_id }}</td>
+                            <td>{{ movement.to_warehouse_id }}</td>
+                            <td>{{ movement.user_id }}</td>
+                            <td>{{ movement.typ }}</td>
+                            <td>{{ movement.date }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+    <script>
+        new DataTable('#movements', {
+            columns: [
+                { title: 'ID' },
+                { title: 'Onde' },
+                { title: 'Para' },
+                { title: 'Utilizador' },
+                { title: 'Tipo' },
+                { title: 'Data' }
+            ],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pt-PT.json',
+            },
+            responsive: true
+        });
+    </script>
+{% endblock %}

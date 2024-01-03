@@ -7,7 +7,7 @@ from .forms import AddUserForm, AddProductForm, AddWarehouseForm
 
 from . import bp
 from ..login.models import User
-from .models import Product, Warehouse, Product_Warehouse
+from .models import Product, Warehouse, Product_Warehouse, Movements, Product_Movements
 from database import db
 
 ROLES = {
@@ -30,11 +30,6 @@ BRANDS = {
     'springfield': 'Springfield'
 }
 
-
-@bp.route('/<input>')
-@login_required
-def serve(input):
-    return redirect("/"+ input) #abort(404)
 
 @bp.route('/home')
 @login_required
@@ -65,7 +60,6 @@ def users():
     if current_user.role == 'admin' or current_user.role == 'gerente':
         return render_template('users/users_table.html', user=current_user, tab="users", all_users=all_users)
     else:
-        #abort(404)
         return redirect(request.referrer or 'home')
 
 
@@ -303,3 +297,23 @@ def view_stock_warehouses(id):
 
     result = db.session.execute(query, {'warehouse_id': id})
     return render_template('stock/stock_table.html', user=current_user, tab="stock", warehouse=warehouse, products=result)
+
+@bp.route('/movements')
+@login_required
+def movements():
+    movements_query = Movements.query.all()
+
+    all_movements = []
+    for movement in movements_query:
+        all_movements.append(
+            {
+                "id": movement.id,
+                "from": movement.from_warehouse_id,
+                "to": movement.to_warehouse_id,
+                "user": movement.user_id,
+                "type": movement.typ,
+                "date": movement.date,
+            }
+        )
+
+    return render_template('movements/movements_table.html', user=current_user, tab="movements", all_movements=all_movements)

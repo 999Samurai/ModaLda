@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template
 from flask_login import current_user
 
 from database import db
@@ -23,7 +23,7 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.login_message = "Efetue o login para aceder a esta página."
     login_manager.init_app(app)
-
+    
     @app.route('/')
     def home():
         if current_user.is_authenticated:
@@ -31,6 +31,7 @@ def create_app():
         return redirect(url_for("auth.login"))
 
     return app
+
 
 
 if __name__ == '__main__':
