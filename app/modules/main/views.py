@@ -362,9 +362,9 @@ def movements():
         all_movements.append(
             {
                 "id": movement.id,
-                "from": movement.from_warehouse_id,
-                "to": movement.to_warehouse_id,
-                "user": movement.user_id,
+                "from": movement.from_warehouse.name,
+                "to": movement.to_warehouse.name,
+                "user": movement.user.username,
                 "type": movement.typ,
                 "date": movement.date,
             }
@@ -380,6 +380,82 @@ def add_movements_get():
     warehouses = Warehouse.query.all()
 
     return render_template("movements/movements_add.html", user=current_user, tab="movements", warehouses=warehouses)
+
+
+@bp.route('/movements/add', methods=['POST'])
+@login_required
+def add_movements_post():
+    warehouse_from = request.form.get("from_warehouse")
+    warehouse_to = request.form.get("to_warehouse")
+    movement_type = request.form.get("type")
+
+    if warehouse_from is None or warehouse_to is None or movement_type is None:
+        flash("Preencha todos os campos")
+        return redirect(url_for("main.add_movements_post"))
+
+    products = request.form.getlist("produtos[]", type=int)
+    quantities = request.form.getlist("quantidade[]", type=int)
+
+    if len(products) == 0:
+        flash("Selecione pelo menos um produto para realizar o movimento")
+        return redirect(url_for("main.add_movements_post"))
+
+    if len(quantities) == 0:
+        flash("Selecione as quantidades dos produtos selecionados")
+        return redirect(url_for("main.add_movements_post"))
+
+    if len(products) != len(quantities):
+        flash("Preencha respetivamente a quantidade e os produtos")
+        return redirect(url_for("main.add_movements_post"))
+
+    from_warehouse_products = Product_Warehouse.query.filter(Product_Warehouse.product_id.in_(products))\
+        .filter_by(warehouse_id=warehouse_from).all()
+
+    for i in range(0, len(products)):
+        for prod in from_warehouse_products:
+            if products[i] == prod.product_id:
+                if quantities[i] > prod.quantity:
+                    flash(f"A quantidade desejada no produto {prod.product.name} é maior que a existente")
+                    return redirect(url_for("main.add_movements_post"))
+
+                prod.quantity -= quantities[i]
+                db.session.flush()
+                db.session.commit()
+
+    movement = Movements(current_user.id, warehouse_from, warehouse_to, movement_type)
+    db.session.add(movement)
+    db.session.flush()
+    db.session.refresh(movement)
+
+    for i in range(0, len(products)):
+        product_warehouse_to = Product_Warehouse.query.filter_by(product_id=products[i], warehouse_id=warehouse_to).first()
+
+        prod_movement = Product_Movements(movement.id, products[i], quantities[i])
+        db.session.add(prod_movement)
+
+        if product_warehouse_to is None:
+            record = Product_Warehouse(product_id=products[i], warehouse_id=warehouse_to, quantity=quantities[i])
+            db.session.add(record)
+        else:
+            product_warehouse_to.quantity += quantities[i]
+            db.session.flush()
+
+        db.session.commit()
+
+    flash(f"Movimento realizado com sucesso")
+    return redirect(url_for("main.movements"))
+
+
+@bp.route('/movements/<int:movement_id>')
+@login_required
+def view_movements_get(movement_id):
+    warehouses = Warehouse.query.all()
+
+    movement = Movements.query.filter_by(id=movement_id).first_or_404()
+    products_movement = Product_Movements.query.filter_by(movement_id=movement_id).all()
+
+    return render_template("movements/movements_view.html", user=current_user, tab="movements",
+                           warehouses=warehouses, movement=movement, products_movement=products_movement)
 
 
 @bp.route('/api/warehouses/<int:warehouse_id>/products')

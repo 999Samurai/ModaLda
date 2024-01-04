@@ -39,8 +39,7 @@ class Product(db.Model):
     def __init__(
         self, name, category, 
         color, brand, min_stock, 
-        max_stock, current_stock, 
-        last_buy_price, avg_buy_price, sell_price, desc):
+        max_stock, last_buy_price, avg_buy_price, sell_price, desc):
         
         self.name = name
         self.category = category
@@ -80,17 +79,17 @@ class Movements(db.Model):
     __table_args__ = {'extend_existing': True}
     
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, ForeignKey(User.id), unique=True)
-    from_warehouse_id = db.Column(db.Integer, ForeignKey(Warehouse.id), unique=True) #FromWarehouse
-    to_warehouse_id = db.Column(db.Integer, ForeignKey(Warehouse.id), unique=True) #ToWarehouse
+    user_id = db.Column(db.Integer, ForeignKey(User.id))
+    from_warehouse_id = db.Column(db.Integer, ForeignKey(Warehouse.id)) #FromWarehouse
+    to_warehouse_id = db.Column(db.Integer, ForeignKey(Warehouse.id)) #ToWarehouse
     typ = db.Column(db.String())
     date = db.Column(db.DateTime, default=db.func.now())
     
-    def __init__(self, user_id, from_warehouse_id, to_warehouse_id, date):
+    def __init__(self, user_id, from_warehouse_id, to_warehouse_id, typ):
         self.user_id = user_id
         self.from_warehouse_id = from_warehouse_id
         self.to_warehouse_id = to_warehouse_id
-        self.date = date
+        self.typ = typ
         
     from_warehouse = relationship('Warehouse', foreign_keys='Movements.from_warehouse_id')
     to_warehouse = relationship('Warehouse', foreign_keys='Movements.to_warehouse_id')
@@ -107,3 +106,8 @@ class Product_Movements(db.Model):
     
     product = relationship('Product', foreign_keys='Product_Movements.product_id')
     movement = relationship('Movements', foreign_keys='Product_Movements.movement_id')
+
+    def __init__(self, movement_id, product_id, quantity):
+        self.movement_id = movement_id
+        self.product_id = product_id
+        self.quantity = quantity

@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="/static/img/icons/icon-48x48.png"/>
 
-    <title>Criar Movimento | ModaLda </title>
+    <title>Ver Movimento | ModaLda </title>
 
    <link href="/static/css/dashboard.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -19,81 +19,62 @@
 {% extends 'sidebar.html' %}
 {% block content %}
     <div class="row">
-        <h1 class="h3 mb-3">Criar Movimento</h1>
+        <h1 class="h3 mb-3">Ver Movimento</h1>
     </div>
 
     <div class="card">
         <div class="card-body">
             <div class="container-fluid">
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        <div class="alert alert-danger p-3" role="alert">
-                            {{ messages[0] }}
-                        </div>
-                    {% endif %}
-                {% endwith %}
-
-                <form action="/movements/add" method="post">
-                    <div class="row mt-2">
-                        <div class="col-12 col-md-4">
-                            <label for="from_warehouse" class="form-label">Armazém de origem</label>
-                            <select class="form-control warehouses" id="from_warehouse" name="from_warehouse" onchange="getProductsAvailable(); selectWarehouses()">
-                                <option disabled="disabled" selected>Selecione um armazém de partida</option>
-                                {% for warehouse in warehouses %}
-                                    <option value="{{ warehouse.id }}">{{ warehouse.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label for="to_warehouse" class="form-label">Armazém de destino</label>
-                            <select class="form-control warehouses" name="to_warehouse" id="to_warehouse" onchange="selectWarehouses()">
-                                <option disabled="disabled" selected>Selecione um armazém de chegada</option>
-                                {% for warehouse in warehouses %}
-                                    <option value="{{ warehouse.id }}">{{ warehouse.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label for="type" class="form-label">Tipo de movimento</label>
-                            <select class="form-control" id="type" name="type">
-                                <option disabled="disabled" selected>Selecione um tipo de movimento</option>
-                                <option value="transfer">Transferência</option>
-                                <option value="devolution">Devolução</option>
-                                <option value="breaks">Quebras</option>
-                            </select>
-                        </div>
+                <div class="row mt-2">
+                    <div class="col-12 col-md-4">
+                        <label for="from_warehouse" class="form-label">Armazém de origem</label>
+                        <select class="form-control warehouses" disabled="disabled" id="from_warehouse" name="from_warehouse" onchange="getProductsAvailable(); selectWarehouses()">
+                            {% for warehouse in warehouses %}
+                                <option value="{{ warehouse.id }}" {% if warehouse.id == movement.from_warehouse_id %}selected{% endif %}>{{ warehouse.name }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
+                    <div class="col-12 col-md-4">
+                        <label for="to_warehouse" class="form-label">Armazém de destino</label>
+                        <select class="form-control warehouses" disabled="disabled" name="to_warehouse" id="to_warehouse" onchange="selectWarehouses()">
+                            {% for warehouse in warehouses %}
+                                <option value="{{ warehouse.id }}" {% if warehouse.id == movement.to_warehouse_id %}selected{% endif %}>{{ warehouse.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="type" class="form-label">Tipo de movimento</label>
+                        <select class="form-control" disabled="disabled" id="type" name="type">
+                            <option value="transfer" {% if movement.typ == "transfer" %}selected{% endif %}>Transferência</option>
+                            <option value="devolution" {% if movement.typ == "devolution" %}selected{% endif %}>Devolução</option>
+                            <option value="breaks" {% if movement.typ == "breaks" %}selected{% endif %}>Quebras</option>
+                        </select>
+                    </div>
+                </div>
 
 
-                    <div class="mt-5">
-                        <button type="button" class="btn btn-primary float-end mb-2" onclick="addNewLine()">Adicionar produto</button>
-
-                        <table class="table table-bordered clearfix" id="products_table">
-                            <thead>
-                                <td style="width: 90%">Produtos</td>
-                                <td>Quantidade</td>
-                            </thead>
-                            <tbody>
+                <div class="mt-5">
+                    <table class="table table-bordered clearfix" id="products_table">
+                        <thead>
+                            <td style="width: 90%">Produtos</td>
+                            <td>Quantidade</td>
+                        </thead>
+                        <tbody>
+                            {% for product in products_movement %}
                                 <tr>
                                     <td>
-                                        <select class="form-control select_products" name="produtos[]" onchange="productSelectListener(event)">
-                                            <option disabled="disabled" selected>Selecione o armazém de origem</option>
+                                        <select class="form-control select_products" disabled="disabled" name="produtos[]" onchange="productSelectListener(event)">
+                                            <option disabled="disabled" selected>{{ product.product.name }}</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <input class="form-control" name="quantidade[]" type="number" placeholder="0" min="0">
+                                        <input class="form-control" disabled="disabled" name="quantidade[]" type="number" value="{{ product.quantity }}" min="0">
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="row mt-4">
-                        <div class="col">
-                            <button type="submit" class="btn btn-primary float-end">Submeter</button>
-                        </div>
-                    </div>
-                </form>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

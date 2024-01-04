@@ -46,10 +46,10 @@
                     {% for movement in all_movements %}
                         <tr>
                             <td>{{ movement.id }}</td>
-                            <td>{{ movement.from_warehouse_id }}</td>
-                            <td>{{ movement.to_warehouse_id }}</td>
-                            <td>{{ movement.user_id }}</td>
-                            <td>{{ movement.typ }}</td>
+                            <td>{{ movement.from }}</td>
+                            <td>{{ movement.to }}</td>
+                            <td>{{ movement.user }}</td>
+                            <td>{{ movement.type }}</td>
                             <td>{{ movement.date }}</td>
                             <td>
                                 <a class="text-decoration-none" href="/movements/{{ movement.id }}">
