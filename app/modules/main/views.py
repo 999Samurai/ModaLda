@@ -1,4 +1,4 @@
-from flask import render_template, redirect, flash, request, url_for, abort
+from flask import render_template, redirect, flash, request, url_for, abort, jsonify
 from flask_login import login_required, current_user
 from sqlalchemy import text
 
@@ -380,3 +380,34 @@ def add_movements_get():
     warehouses = Warehouse.query.all()
 
     return render_template("movements/movements_add.html", user=current_user, tab="movements", warehouses=warehouses)
+
+
+@bp.route('/api/warehouses/<int:warehouse_id>/products')
+@login_required
+def api_warehouse_products(warehouse_id):
+    Warehouse.query.filter_by(id=warehouse_id).first_or_404()
+
+    query = text('''
+         SELECT
+            products.id as id,
+            products.name AS name,
+            products_warehouses.quantity AS quantity
+        FROM
+            products
+        LEFT JOIN
+            products_warehouses ON products_warehouses.product_id = products.id AND products_warehouses.warehouse_id = :warehouse_id
+        LEFT JOIN
+            warehouses ON warehouses.id = products_warehouses.warehouse_id
+    ''')
+
+    results = db.session.execute(query, {'warehouse_id': warehouse_id})
+    products = []
+
+    for result in results:
+        products.append({
+            'id': result.id,
+            'name': result.name,
+            'quantity': result.quantity
+        })
+
+    return jsonify(products)
