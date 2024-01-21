@@ -8,10 +8,11 @@ from . import bp
 @bp.route('/login')
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("main.dashboard"))
+        return redirect(url_for("main.home"))
 
     return render_template('login.html')
 
+ 
 
 # POST /login
 # @param username
@@ -27,7 +28,7 @@ def login_post():
         return redirect(url_for("auth.login"))
 
     login_user(user)
-    return redirect(url_for("main.dashboard"))
+    return redirect(url_for("main.home"))
 
 
 @bp.route('/logout')

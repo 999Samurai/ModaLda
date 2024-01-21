@@ -28,7 +28,7 @@ def create_app():
     @app.route('/')
     def home():
         if current_user.is_authenticated:
-            return redirect(url_for("main.dashboard"))
+            return redirect(url_for("main.home"))
         return redirect(url_for("auth.login"))
 
     return app
