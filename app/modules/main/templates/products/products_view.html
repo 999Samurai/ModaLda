@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Dashboard, ModaLda">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="/static/img/icons/icon-48x48.png"/>
+
+    <title>{% if action == 'view' %}Ver{% else %}Editar{% endif %} Produto | ModaLda </title>
+
+   <link href="/static/css/dashboard.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+{% extends 'sidebar.html' %}
+{% block content %}
+    <div class="row">
+        <h1 class="h3 mb-3">{% if action == 'view' %}Ver{% else %}Editar{% endif %} Produto</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="container-fluid">
+                {% for field, errors in form.errors.items() %}
+                    <div class="alert alert-warning p-3" role="alert">
+                        {{ form[field].label }}: {{ ', '.join(errors) }}
+                    </div>
+                {% endfor %}
+
+                <form action="" method="post">
+                    {{ form.csrf_token }}
+                    <div class="row">
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.name.label(class_="form-label") }}
+                            {% if action == 'view' %}
+                                {{ form.name(class_="form-control", disabled="disabled") }}
+                            {% else %}
+                                {{ form.name(class_="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.category.label(class_="form-label") }}
+                            {% if action == 'view' %}
+                                {{ form.category(class_="form-control", disabled="disabled") }}
+                            {% else %}
+                                {{ form.category(class_="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.color.label(class_="form-label") }}
+                            {% if action == 'view' %}
+                                {{ form.color(class_="form-control", disabled="disabled") }}
+                            {% else %}
+                                {{ form.color(class_="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.brand.label(class_="form-label") }}
+                            {% if action == 'view' %}
+                                {{ form.brand(class_="form-control", disabled="disabled") }}
+                            {% else %}
+                                {{ form.brand(class_="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.min_stock.label(class_="form-label") }}
+                            {% if action == 'view' %}
+                                {{ form.min_stock(class_="form-control", disabled="disabled") }}
+                            {% else %}
+                                {{ form.min_stock(class_="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.max_stock.label(class_="form-label") }}
+                            {% if action == 'view' %}
+                                {{ form.max_stock(class_="form-control", disabled="disabled") }}
+                            {% else %}
+                                {{ form.max_stock(class_="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.last_buy_price.label(class_="form-label") }}
+                            {% if action == 'view' %}
+                                {{ form.last_buy_price(class_="form-control", disabled="disabled") }}
+                            {% else %}
+                                {{ form.last_buy_price(class_="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.avg_buy_price.label(class_="form-label") }}
+                            {% if action == 'view' %}
+                                {{ form.avg_buy_price(class_="form-control", disabled="disabled") }}
+                            {% else %}
+                                {{ form.avg_buy_price(class_="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.sell_price.label(class_="form-label") }}
+                            {% if action == 'view' %}
+                                {{ form.sell_price(class_="form-control", disabled="disabled") }}
+                            {% else %}
+                                {{ form.sell_price(class_="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.desc.label(class_="form-label") }}
+                            {% if action == 'view' %}
+                                {{ form.desc(class_="form-control", disabled="disabled") }}
+                            {% else %}
+                                {{ form.desc(class_="form-control") }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="row">
+                            <div class="col">
+                                {% if action == 'edit' %}
+                                    <button type="submit" class="btn btn-primary float-end">Submeter</button>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        {% if action == 'view' %}
+                            <div class="row">
+                                <div class="col">
+                                    {% if prev is not none %}
+                                        <a href="/products/{{ prev }}" class="btn btn-primary"> < Anterior</a>
+                                    {% endif %}
+                                </div>
+                                <div class="col">
+                                    {% if next is not none %}
+                                        <a href="/products/{{ next }}" class="btn btn-primary float-end">Próximo ></a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

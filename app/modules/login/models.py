@@ -18,6 +18,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String())
     role = db.Column(db.String())
     last_login = db.Column(db.DateTime, server_default=db.func.now())
+    active = db.Column(db.Boolean, unique=False, default=True)
 
     def __init__(self, username, password, role):
         self.username = username

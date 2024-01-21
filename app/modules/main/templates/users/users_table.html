@@ -15,6 +15,7 @@
     <link href="/static/css/dashboard.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 </head>
 
 {% extends 'sidebar.html' %}
@@ -58,8 +59,12 @@
                                         <i class="align-middle text-warning" data-feather="edit"></i>
                                     </a>
                                     <a class="text-decoration-none">
-                                        <i class="align-middle text-danger" data-feather="trash-2"></i>
-                                    </a>
+                                        <form action="/users/delete/{{ user.id }}" method="POST" class="d-inline">
+                                            <button type="submit" style="all: unset">
+                                                <i class="align-middle text-danger" data-feather="trash-2"></i>
+                                            </button>
+                                        </form>
+                                     </a>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -74,6 +79,7 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
     <script>
         new DataTable('#users', {

@@ -1,11 +1,23 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField, validators, DecimalField, IntegerField
+from wtforms import StringField, PasswordField, SelectField, validators, DecimalField, IntegerField, HiddenField
 from wtforms.validators import InputRequired
+from wtforms.widgets import PasswordInput
 
 
 class AddUserForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), validators.length(max=32)])
     password = PasswordField('Password', validators=[InputRequired(), validators.length(min=6, max=32)])
+    role = SelectField('Cargo',
+        choices=[('admin', 'Admin'), ('gerente', 'Gerente'), ('funcionario', 'Funcionário')],
+        default="funcionario",
+        validators=[InputRequired()]
+    )
+
+
+class EditUserForm(FlaskForm):
+    id = HiddenField('id', validators=[InputRequired()])
+    username = StringField('Username', validators=[InputRequired(), validators.length(max=32)])
+    password = StringField('Password', widget=PasswordInput(hide_value=False), validators=[InputRequired(), validators.length(min=5, max=32)])
     role = SelectField('Cargo',
         choices=[('admin', 'Admin'), ('gerente', 'Gerente'), ('funcionario', 'Funcionário')],
         default="funcionario",

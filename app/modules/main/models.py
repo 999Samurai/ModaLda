@@ -4,7 +4,6 @@ from sqlalchemy.orm import relationship
 from modules.login.models import User
 
 
-
 class Warehouse(db.Model):
     __tablename__ = 'warehouses'
     __table_args__ = {'extend_existing': True}
@@ -13,6 +12,7 @@ class Warehouse(db.Model):
     name = db.Column(db.String(), unique=True)
     address = db.Column(db.String())
     phone = db.Column(db.String())
+    active = db.Column(db.Boolean, unique=False, default=True)
 
     def __init__(self, name, address, phone):
         self.name = name
@@ -35,6 +35,7 @@ class Product(db.Model):
     avg_buy_price = db.Column(db.Float())
     sell_price = db.Column(db.Float())
     desc = db.Column(db.String())
+    active = db.Column(db.Boolean, unique=False, default=True)
 
     def __init__(
         self, name, category, 

@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="/static/img/icons/icon-48x48.png"/>
 
-    <title>Ver Armazém | ModaLda </title>
+    <title>{% if action == 'view' %}Ver{% else %}Editar{% endif %} Armazém | ModaLda </title>
 
    <link href="/static/css/dashboard.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -20,39 +20,72 @@
 {% extends 'sidebar.html' %}
 {% block content %}
     <div class="row">
-        <h1 class="h3 mb-3">Ver Armazém</h1>
+        <h1 class="h3 mb-3">{% if action == 'view' %}Ver{% else %}Editar{% endif %} Armazém</h1>
     </div>
 
     <div class="card">
         <div class="card-body">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 col-md-6 mt-2">
-                        <label for="name" class="form-label">Nome</label>
-                        <input class="form-control" id="name" value="{{ warehouse_view.name }}" disabled="disabled">
+                {% for field, errors in form.errors.items() %}
+                    <div class="alert alert-warning p-3" role="alert">
+                        {{ form[field].label }}: {{ ', '.join(errors) }}
                     </div>
-                    <div class="col-12 col-md-6 mt-2">
-                        <label for="phone" class="form-label">Número</label>
-                        <input class="form-control" id="phone" value="{{ warehouse_view.phone }}" disabled="disabled">
-                    </div>
-                    <div class="col-12 col-md-12 mt-2">
-                        <label for="address" class="form-label">Morada</label>
-                        <input class="form-control" id="address" value="{{ warehouse_view.address }}" disabled="disabled">
-                    </div>
-                </div>
+                {% endfor %}
 
-                <div class="row mt-4">
-                    <div class="col">
-                        {% if prev is not none %}
-                            <a href="/warehouses/{{ prev }}" class="btn btn-primary"> < Anterior</a>
+                <form action="" method="post">
+                    {{ form.csrf_token }}
+                    <div class="row">
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.name.label(class_="form-label") }}
+                            {% if action == 'view' %}
+                                {{ form.name(class_="form-control", disabled="disabled") }}
+                            {% else %}
+                                {{ form.name(class_="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.address.label(class_="form-label") }}
+                            {% if action == 'view' %}
+                                {{ form.address(class_="form-control", disabled="disabled") }}
+                            {% else %}
+                                {{ form.address(class_="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-4 mt-2">
+                            {{ form.phone.label(class_="form-label") }}
+                            {% if action == 'view' %}
+                                {{ form.phone(class_="form-control", disabled="disabled") }}
+                            {% else %}
+                                {{ form.phone(class_="form-control") }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="row">
+                            <div class="col">
+                                {% if action == 'edit' %}
+                                    <button type="submit" class="btn btn-primary float-end">Submeter</button>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        {% if action == 'view' %}
+                            <div class="row">
+                                <div class="col">
+                                    {% if prev is not none %}
+                                        <a href="/users/{{ prev }}" class="btn btn-primary"> < Anterior</a>
+                                    {% endif %}
+                                </div>
+                                <div class="col">
+                                    {% if next is not none %}
+                                        <a href="/users/{{ next }}" class="btn btn-primary float-end">Próximo ></a>
+                                    {% endif %}
+                                </div>
+                            </div>
                         {% endif %}
                     </div>
-                    <div class="col">
-                        {% if next is not none %}
-                            <a href="/warehouses/{{ next }}" class="btn btn-primary float-end">Próximo ></a>
-                        {% endif %}
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
