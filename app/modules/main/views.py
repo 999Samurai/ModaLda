@@ -457,7 +457,7 @@ def post_delete_product(id):
 @bp.route('/stock')
 @login_required
 def stock():
-    warehouses_query = Warehouse.query.all()
+    warehouses_query = Warehouse.query.filter_by(active=1).all()
 
     return render_template('stock/select_warehouse.html', user=current_user, tab="stock",
                            warehouses=warehouses_query)
